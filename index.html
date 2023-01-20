@@ -1,61 +1,36 @@
 <!DOCTYPE html>
 <html>
-
-<body onload="myLoading()" style="background-color: transparent;">
+<body  style="background-color: transparent; border:transparent;  " onload="myLoading()">
 <!-- <meta http-equiv="refresh" content="10"> -->
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 
 
-<div><object data="userinfo.txt" style="width:500px;height:40px;"> 
-</object></div>
+<h2><a href="https://dream.ai/booth"><img id = "myUser" style="width:500px;height:40px;opacity:1;filter:alpha(opacity=40);border:transparent"></a>
+</h2>
 
-<!--<h2></h2>-->
+<a href="https://dream.ai/booth"><img id = "myImg"  style="width:500px;height:500px;opacity:1;filter:alpha(opacity=40);border:transparent"></a>
+<h3></h2><a href="https://dream.ai/booth"><img id ="myPrompt" style="width:500px;height:40px;opacity:1;filter:alpha(opacity=40);border:transparent"></a>
+</h3>
 
-<a href="https://dream.ai/booth"><img id="myImg" src="https://samipierre.github.io/twitchbot_webpage/image_name.png" style="width:500px;height:500px;opacity:1;filter:alpha(opacity=40);"></a>
-<a id='mytext'></a>
-<!-- <div><object data="prompt.txt" style="width:500px;height:40px;"> 
-</object></div> -->
+<!--<div><object data="prompt.txt" style="width:500px;height:40px;"> 
+</object></div>-->
+
+<!--<div><object data="prompt.txt" style="width:500px;height:40px;"> 
+</object></div>-->
 <script>
 	var myTime = 0;
 	function myLoading(){
 		console.log("Loading...");
+		loadUser();
 		loadImage();
+		loadPrompt();
 
-		setTimeout(function() {
-			console.log("Refreshing");
-			// window.location.reload();
-		},10000);
-		getSampleText()
-	}
+		// setTimeout(function() {
+		// 	console.log("Refreshing");
+		// 	window.location.reload();
+		// },1000);
 
-	function readTextFile(file)
-	{
-	    var rawFile = new XMLHttpRequest();
-	    rawFile.open("GET", file, false);
-	    rawFile.onreadystatechange = function ()
-	    {
-	        if(rawFile.readyState === 4)
-	        {
-	            if(rawFile.status === 200 || rawFile.status == 0)
-	            {
-	                var allText = rawFile.responseText;
-	                alert(allText);
-	            }
-	        }
-	    }
-	    rawFile.send(null);
+		
 	}
-	async function getSampleText() {
-		file = "prompt.txt";
-		let x = await fetch(file);
-		let y = await x.text();
-		console.log(y);
-		document.getElementById("mytext").innerHTML = y;
-  		// console.log( (await fetch("https://stream.wombo.net/prompt.txt")).text() );
-	}
-
 
 	function loadImage() {
 		// alert("Hi");
@@ -67,6 +42,26 @@
 		
 	}
 
+	function loadUser() {
+		// alert("Hi");
+		console.log("Loading User");
+		var newUser = new Image();
+		
+		newUser.src = "https://stream.wombo.net/userinfo.png?" + new Date().getTime();
+		document.getElementById("myUser").src = newUser.src;
+		
+	}
+
+	function loadPrompt() {
+		// alert("Hi");
+		console.log("Loading Prompt");
+		var newPrompt = new Image();
+		
+		newPrompt.src = "https://stream.wombo.net/prompt.png?" + new Date().getTime();
+		document.getElementById("myPrompt").src = newPrompt.src;
+		
+	}
+
 	var seconds = 0;
 	var el = document.getElementById('seconds-counter');
 
@@ -74,12 +69,11 @@
 	    seconds += 1;
 	    console.log("You have been here for " + seconds + " seconds.");
 	}
-	readTextFile("prompt.txt");
-	// var cancel = setInterval(incrementSeconds, 1000);
-	// var cancel2 = setInterval(loadImage, 1000);
-	// var cancel3 = setInterval(getSampleText, 1000);
-	
 
+	var cancel = setInterval(incrementSeconds, 5000);
+	var cancel2 = setInterval(loadImage, 5000);
+	var cancel3 = setInterval(loadUser, 5000);
+	var cancel4 = setInterval(loadPrompt, 5000);
 
 </script>
 <!--<p></p>-->
